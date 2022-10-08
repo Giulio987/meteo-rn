@@ -4,18 +4,18 @@ import { Fonts } from '../styles/Fonts';
 import Colors from '../styles/Colors';
 
 interface AddCityBtnProps {
-  hideText?: boolean;
+  onPress: () => void;
 }
 
-const AddCityBtn = () => {
+const AddCityBtn = ({ onPress }: AddCityBtnProps) => {
   return (
     <View style={styles.buttonContainer}>
       <Pressable
         style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-        onPress={() => {}}
+        onPress={onPress}
       >
         <Image source={require('../assets/Plus.png')}></Image>
-        <Text style={styles.text}>Aggiungi città</Text>
+        <Text style={styles.text}>Add city</Text>
       </Pressable>
     </View>
   );

@@ -6,6 +6,7 @@ import {
   CompositeNavigationProp,
   CompositeScreenProps,
   NavigatorScreenParams,
+  RouteProp,
 } from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
@@ -23,9 +24,10 @@ export type BottomTabsParamList = {
 export type HomeStackParamList = {
   Home: undefined;
   CityInfo: { city: CityWeather };
+  InputModal: undefined;
 };
 
-//NOTE Note Route props -> da usare quando si passano navigation e route come props oppure con l'hook per route
+//NOTE Note Route props -> da usare quando si passano navigation e
 export type HomeStackNavigationProps = NativeStackScreenProps<
   HomeStackParamList,
   'Home'
@@ -36,8 +38,11 @@ export type RootBottomTabsScreenProps = CompositeScreenProps<
   HomeStackNavigationProps
 >;
 
-//NOTE per l'annotazione del navigation
+//NOTE per l'annotazione del navigation -> useNavigation
 export type RootBottomNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<BottomTabsParamList, 'HomeNav'>,
   NativeStackNavigationProp<HomeStackParamList>
 >;
+
+//NOTE Per l'annotazione del route utilizzato -> useRoute
+export type HomeRouteProp = RouteProp<HomeStackParamList, 'CityInfo'>;

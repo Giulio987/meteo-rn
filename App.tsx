@@ -11,6 +11,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import Colors from './styles/Colors';
 import CityInfo from './screens/CityInfo';
 import { HomeStackParamList, BottomTabsParamList } from './models/route';
+import CityInput from './components/CityInput';
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
@@ -20,20 +21,29 @@ SplashScreen.preventAutoHideAsync();
 function HomeStackNavigator() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="Home"
-        component={Home}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <HomeStack.Screen
-        name="CityInfo"
-        component={CityInfo}
-        options={{
-          headerShown: false,
-        }}
-      />
+      <HomeStack.Group>
+        <HomeStack.Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <HomeStack.Screen
+          name="CityInfo"
+          component={CityInfo}
+          options={{
+            headerShown: false,
+          }}
+        />
+      </HomeStack.Group>
+      <HomeStack.Group screenOptions={{ presentation: 'modal' }}>
+        <HomeStack.Screen
+          component={CityInput}
+          name="InputModal"
+          options={{ headerShown: false }}
+        />
+      </HomeStack.Group>
     </HomeStack.Navigator>
   );
 }

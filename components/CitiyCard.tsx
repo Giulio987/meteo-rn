@@ -16,47 +16,59 @@ const CitiyCard = ({ city }: CitiyCardProps) => {
   const month = getFormattedDate(city.mainWeather.localeDate)[1];
   const navigation = useNavigation<RootBottomNavigationProp>();
   return (
-    <Pressable
-      onPress={() => {
-        navigation.navigate('HomeNav', {
-          screen: 'CityInfo',
-          params: { city },
-        });
-      }}
-    >
-      <LinearGradient
-        colors={[city.mainWeather.style.first, city.mainWeather.style.second]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-        style={styles.card}
+    <View style={styles.outerCard}>
+      <Pressable
+        onPress={() => {
+          navigation.navigate('HomeNav', {
+            screen: 'CityInfo',
+            params: { city },
+          });
+        }}
       >
-        <View>
-          <Text style={styles.title}>{city.name}</Text>
-          <Text style={styles.date}>
-            {day}
-            {'\n'}
-            {month}
+        <LinearGradient
+          colors={[city.mainWeather.style.first, city.mainWeather.style.second]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.innerCard}
+        >
+          <View>
+            <Text style={styles.title}>{city.name}</Text>
+            <Text style={styles.date}>
+              {day}
+              {'\n'}
+              {month}
+            </Text>
+            <Text style={styles.time}>{city.mainWeather.localTime}</Text>
+          </View>
+          {/*@ts-ignore TODO?*/}
+          <Image source={city.mainWeather.image} />
+          <Text style={styles.temperature}>
+            {city.mainWeather.temperature.toFixed() + '°'}
           </Text>
-          <Text style={styles.time}>{city.mainWeather.localTime}</Text>
-        </View>
-        {/*@ts-ignore TODO?*/}
-        <Image source={city.mainWeather.image} />
-        <Text style={styles.temperature}>
-          {city.mainWeather.temperature.toFixed() + '°'}
-        </Text>
-      </LinearGradient>
-    </Pressable>
+        </LinearGradient>
+      </Pressable>
+    </View>
   );
 };
 
 export default CitiyCard;
 
 const styles = StyleSheet.create({
-  card: {
+  outerCard: {
+    //Android
+    elevation: 5,
+    //IOS
+    shadowColor: '#0000002b',
+    shadowOffset: { width: 5, height: 10 },
+    shadowOpacity: 1,
+    shadowRadius: 8,
+    marginTop: 20,
+    flex: 1,
+  },
+  innerCard: {
     flex: 1,
     padding: 20,
     paddingRight: 25,
-    marginTop: 20,
     borderRadius: 25,
     flexDirection: 'row',
     alignItems: 'center',

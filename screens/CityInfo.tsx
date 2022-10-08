@@ -13,9 +13,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import TemperatureRow from '../components/TemperatureRow';
 import { Fonts, FontSizes } from '../styles/Fonts';
 import NextDaysList from '../components/NextDaysList';
+import { HomeRouteProp } from '../models/route';
 
 const CityInfo = () => {
-  const route = useRoute<any>(); //TODO: fix any
+  const route = useRoute<HomeRouteProp>();
   return (
     <LinearGradient
       style={styles.container}

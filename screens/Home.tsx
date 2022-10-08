@@ -2,6 +2,8 @@ import React, { useCallback, useEffect } from 'react';
 import {
   Dimensions,
   FlatList,
+  Modal,
+  Pressable,
   RefreshControl,
   StyleSheet,
   Text,
@@ -16,6 +18,9 @@ import { useSelector } from 'react-redux';
 import CitiyCard from '../components/CitiyCard';
 import { FontSizes } from '../styles/Fonts';
 import { LinearGradient } from 'expo-linear-gradient';
+import CityInput from '../components/CityInput';
+import { RootBottomNavigationProp } from '../models/route';
+import { useNavigation } from '@react-navigation/native';
 
 const INITIAL_CITIES = [
   {
@@ -59,6 +64,7 @@ const Home = () => {
     setRefreshing(true);
     dispatchMyAPi().then(() => setRefreshing(false));
   }, []);
+  const navigation = useNavigation<RootBottomNavigationProp>();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -68,7 +74,14 @@ const Home = () => {
         ListHeaderComponent={
           <View style={styles.listHeader}>
             <Text style={styles.title}>Good morning!{'\n'}Giulio</Text>
-            <AddCityBtn />
+            <AddCityBtn
+              onPress={() => {
+                navigation.navigate('HomeNav', {
+                  screen: 'InputModal',
+                });
+              }}
+            />
+            {/*TODO funzione a parte*/}
           </View>
         }
         renderItem={({ item }) => <CitiyCard city={item} />}
@@ -77,7 +90,7 @@ const Home = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
-      <LinearGradient //TODO sistemare il linear gradient per a lista
+      <LinearGradient
         style={{
           position: 'absolute',
           bottom: 30,
@@ -100,7 +113,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.backgroundColor,
-    marginTop: height > 800 ? 40 : 20,
     marginBottom: 80,
     overflow: 'hidden',
   },
@@ -112,6 +124,7 @@ const styles = StyleSheet.create({
   },
   listContentContainer: {
     marginHorizontal: 20,
+    marginTop: height > 800 ? 40 : 20,
   },
   title: {
     fontFamily: 'Poppins-SemiBold',
