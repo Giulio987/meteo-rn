@@ -24,6 +24,7 @@ const getWeather =
       }
       const data = await response.json();
       const additionalData = getImageAndStyleFromWeather(
+        data.current.weather[0].id,
         data.current.weather[0].main,
         city.id
       );
@@ -41,7 +42,6 @@ const getWeather =
         minute: '2-digit',
         hour12: false,
       });
-      console.log(dateTime);
 
       //Creazione oggetto
       const cityWeather: CityWeather = {
@@ -69,8 +69,11 @@ const getWeather =
               month: 'long',
             })
             .split(',')[0],
-          image: getImageAndStyleFromWeather(day.weather[0].main, city.id)
-            .image,
+          image: getImageAndStyleFromWeather(
+            day.weather[0].id,
+            day.weather[0].main,
+            city.id
+          ).image,
         })),
       };
       dispatch(setWeather(cityWeather));

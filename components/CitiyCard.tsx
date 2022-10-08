@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Fonts, FontSizes } from '../styles/Fonts';
 import { getFormattedDate } from '../modules/utilities';
 import { useNavigation } from '@react-navigation/native';
+import { RootBottomNavigationProp } from '../models/route';
 
 interface CitiyCardProps {
   city: CityWeather;
@@ -13,7 +14,7 @@ interface CitiyCardProps {
 const CitiyCard = ({ city }: CitiyCardProps) => {
   const day = getFormattedDate(city.mainWeather.localeDate)[0];
   const month = getFormattedDate(city.mainWeather.localeDate)[1];
-  const navigation = useNavigation<any>(); //TODO: fix any
+  const navigation = useNavigation<RootBottomNavigationProp>();
   return (
     <Pressable
       onPress={() => {

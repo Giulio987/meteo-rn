@@ -15,6 +15,7 @@ import Colors from '../styles/Colors';
 import { useSelector } from 'react-redux';
 import CitiyCard from '../components/CitiyCard';
 import { FontSizes } from '../styles/Fonts';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const INITIAL_CITIES = [
   {
@@ -36,8 +37,6 @@ const INITIAL_CITIES = [
 ];
 
 const Home = () => {
-  //TODO background color
-  //TODO fix orario -> londra un ora indietro
   //TODO mettera anche i meteo che mancano e prenderli dalla descrizione avanzata: es partly-cloudy-day e occ-light-rain
   //Redux
   //TODO mettere tutti i path di imamagini in costanti
@@ -78,6 +77,17 @@ const Home = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
+      <LinearGradient //TODO sistemare il linear gradient per a lista
+        style={{
+          position: 'absolute',
+          bottom: 30,
+          width: '90%',
+          height: 20,
+          marginHorizontal: 20,
+        }}
+        colors={['rgba(255, 255, 255, 0.001)', 'rgba(255, 255, 255, 0.1)']}
+        pointerEvents={'none'}
+      />
     </SafeAreaView>
   );
 };
@@ -91,6 +101,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.backgroundColor,
     marginTop: height > 800 ? 40 : 20,
+    marginBottom: 80,
+    overflow: 'hidden',
   },
   list: {
     paddingTop: 50,

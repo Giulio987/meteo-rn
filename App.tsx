@@ -1,15 +1,6 @@
-import {
-  CompositeNavigationProp,
-  NavigationContainer,
-} from '@react-navigation/native';
-import {
-  BottomTabNavigationProp,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
-import {
-  createNativeStackNavigator,
-  NativeStackNavigationProp,
-} from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Image, StyleSheet, View } from 'react-native';
 import Home from './screens/Home';
 import { Provider } from 'react-redux';
@@ -19,14 +10,9 @@ import { useCallback, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import Colors from './styles/Colors';
 import CityInfo from './screens/CityInfo';
-import { HomeStackParamList } from './models/route';
+import { HomeStackParamList, BottomTabsParamList } from './models/route';
 
-export type ProfileScreenNavigationProp = CompositeNavigationProp<
-  BottomTabNavigationProp<HomeStackParamList, 'Home'>,
-  NativeStackNavigationProp<HomeStackParamList>
->;
-
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabsParamList>();
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
 
 SplashScreen.preventAutoHideAsync();

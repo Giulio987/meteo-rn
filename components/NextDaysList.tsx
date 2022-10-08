@@ -1,9 +1,9 @@
 import { FlatList, StyleSheet } from 'react-native';
 import React from 'react';
 import DayCard from './DayCard';
+import { DailyWeather } from '../models/weather';
 
-const NextDaysList = ({ dailyWeather }: any) => {
-  //TODO fix any
+const NextDaysList = ({ dailyWeather }: { dailyWeather: DailyWeather[] }) => {
   return (
     <FlatList
       contentContainerStyle={styles.list}
@@ -15,9 +15,9 @@ const NextDaysList = ({ dailyWeather }: any) => {
     />
   );
 };
-//TODO mettere la lista a 20 px dal bordo in basso e adattare la shermata al device
-export default NextDaysList;
+//TODO adaptive per schermi piccoli
 
+export default NextDaysList;
 const styles = StyleSheet.create({
   list: {
     marginBottom: 100,

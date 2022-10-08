@@ -4,8 +4,13 @@ import Colors from '../styles/Colors';
 const cloudy = require('../assets/Cloudy.png');
 const rainy = require('../assets/OccLightRain.png');
 const sunny = require('../assets/Sunny.png');
+const modRainSwrsDay = require('../assets/ModRainSwrsDay.png');
 
-const getImageAndStyleFromWeather = (weather: string, id: number) => {
+const getImageAndStyleFromWeather = (
+  id: number,
+  weather: string,
+  cityId: number
+) => {
   switch (weather) {
     case 'Clouds':
       return {
@@ -16,13 +21,22 @@ const getImageAndStyleFromWeather = (weather: string, id: number) => {
         },
       };
     case 'Rain':
-      return {
-        image: rainy,
-        style: {
-          first: Colors.rainy.main,
-          second: Colors.rainy.light,
-        },
-      };
+      if (id === 500 || id === 501 || id === 502 || id === 503 || id === 504) {
+        return {
+          image: modRainSwrsDay,
+          style: {
+            first: Colors.rainy.main,
+            second: Colors.rainy.light,
+          },
+        };
+      } else
+        return {
+          image: rainy,
+          style: {
+            first: Colors.rainy.main,
+            second: Colors.rainy.light,
+          },
+        };
     case 'Clear':
       return {
         image: sunny,
