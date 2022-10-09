@@ -1,7 +1,14 @@
 import { CSSProperties } from 'react';
 
+export interface CityToDispatch {
+  name: string;
+  country: string;
+  id: string;
+  coord: { lat: number; lon: number };
+}
+
 export interface CityWeather {
-  id: number;
+  id: string;
   name: string;
   mainWeather: {
     main: string;

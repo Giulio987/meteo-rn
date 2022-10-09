@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CityWeather } from '../../shared/models/weather';
+import { CityWeather } from '../..//models/weather';
 
 export interface WeatherState {
   isLoading: boolean;
@@ -27,7 +27,7 @@ export const weatherSlice = createSlice({
         } else {
           state.cities = [...state.cities, action.payload];
           //order state.cities by id
-          state.cities.sort((a, b) => a.id - b.id);
+          state.cities.sort((a, b) => (a.id > b.id ? 1 : -1));
         }
       }
     },

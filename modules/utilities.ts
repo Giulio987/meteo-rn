@@ -9,7 +9,7 @@ const modRainSwrsDay = require('../assets/ModRainSwrsDay.png');
 const getImageAndStyleFromWeather = (
   id: number,
   weather: string,
-  cityId: number
+  cityId: string
 ) => {
   switch (weather) {
     case 'Clouds':

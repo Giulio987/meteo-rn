@@ -27,7 +27,7 @@ export type HomeStackParamList = {
   InputModal: undefined;
 };
 
-//NOTE Note Route props -> da usare quando si passano navigation e
+//NOTE Note Route props -> da usare quando si passano navigation e route a sotto-componenti
 export type HomeStackNavigationProps = NativeStackScreenProps<
   HomeStackParamList,
   'Home'

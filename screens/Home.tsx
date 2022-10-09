@@ -2,8 +2,6 @@ import React, { useCallback, useEffect } from 'react';
 import {
   Dimensions,
   FlatList,
-  Modal,
-  Pressable,
   RefreshControl,
   StyleSheet,
   Text,
@@ -18,22 +16,21 @@ import { useSelector } from 'react-redux';
 import CitiyCard from '../components/CitiyCard';
 import { FontSizes } from '../styles/Fonts';
 import { LinearGradient } from 'expo-linear-gradient';
-import CityInput from '../components/CityInput';
-import { RootBottomNavigationProp } from '../models/route';
 import { useNavigation } from '@react-navigation/native';
+import { RootBottomNavigationProp } from '../models/route';
 
-const INITIAL_CITIES = [
+export const INITIAL_CITIES = [
   {
     name: 'Turin',
     country: 'IT',
-    id: 1,
+    id: 'c1',
     coord: { lat: 45.064, lon: 7.66 },
   },
-  { name: 'London', country: 'GB', id: 2, coord: { lat: 51.5, lon: -0.1 } },
+  { name: 'London', country: 'GB', id: 'c2', coord: { lat: 51.5, lon: -0.1 } },
   {
     name: 'Rome',
     country: 'IT',
-    id: 3,
+    id: 'c3',
     coord: {
       lat: 41.9,
       lon: 12.5,
@@ -42,7 +39,7 @@ const INITIAL_CITIES = [
 ];
 
 const Home = () => {
-  //TODO mettera anche i meteo che mancano e prenderli dalla descrizione avanzata: es partly-cloudy-day e occ-light-rain
+  //TODO per componenti diretti meglio { navigation, route }: RootBottomTabsScreenProps ma c'è un errore nei tipi da fixare
   //Redux
   //TODO mettere tutti i path di imamagini in costanti
   const { cities } = useSelector((state: RootState) => state.weather);
@@ -64,11 +61,13 @@ const Home = () => {
     setRefreshing(true);
     dispatchMyAPi().then(() => setRefreshing(false));
   }, []);
+
   const navigation = useNavigation<RootBottomNavigationProp>();
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
+        style={styles.list}
         contentContainerStyle={styles.listContentContainer}
         data={cities}
         ListHeaderComponent={
@@ -89,6 +88,7 @@ const Home = () => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        showsVerticalScrollIndicator={false}
       />
       <LinearGradient
         style={{
@@ -117,14 +117,15 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   list: {
-    paddingTop: 50,
+    flex: 1,
   },
   listHeader: {
     alignItems: 'center',
   },
   listContentContainer: {
     marginHorizontal: 20,
-    marginTop: height > 800 ? 40 : 20,
+    paddingTop: height > 800 ? 40 : 20,
+    paddingBottom: 30,
   },
   title: {
     fontFamily: 'Poppins-SemiBold',
