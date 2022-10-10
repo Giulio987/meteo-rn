@@ -4,13 +4,14 @@ import { CityToDispatch, CityWeather } from '../../models/weather';
 import getImageAndStyleFromWeather, {
   getHourlyFormat,
 } from '../../modules/utilities';
+//@ts-ignore
+import { REACT_APP_OPEN_WEATHER_API_KEY } from 'react-native-dotenv';
 
 const getWeather = (city: CityToDispatch) => async (dispatch: AppDispatch) => {
   dispatch(setCallState({ isLoading: true, error: null }));
   try {
     const response = await fetch(
-      //@ts-ignore TODO fix
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coord.lat}&lon=${city.coord.lon}&exclude=minutely,&units=metric&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${city.coord.lat}&lon=${city.coord.lon}&exclude=minutely,&units=metric&appid=${REACT_APP_OPEN_WEATHER_API_KEY}`
     );
     if (!response.ok) {
       throw new Error('Request failed');
@@ -81,8 +82,7 @@ const getCityLocation = (city: string) => async (dispatch: AppDispatch) => {
   dispatch(setCallState({ isLoading: true, error: null }));
   try {
     const response = await fetch(
-      //@ts-ignore TODO fix
-      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.REACT_APP_OPEN_WEATHER_API_KEY}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${REACT_APP_OPEN_WEATHER_API_KEY}`
     );
     if (!response.ok) {
       throw new Error('Request failed');

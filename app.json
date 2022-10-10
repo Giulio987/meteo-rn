@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "meteo-rn",
-    "slug": "meteo-rn",
+    "slug": "meteo-rn-v2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,7 +13,7 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/c562bc11-2731-46b3-be76-49b463237732"
+      "url": "https://u.expo.dev/edf97467-0181-4191-a353-980bf3a88bba"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -30,13 +30,13 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "c562bc11-2731-46b3-be76-49b463237732"
-      }
-    },
     "runtimeVersion": {
       "policy": "sdkVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "edf97467-0181-4191-a353-980bf3a88bba"
+      }
     }
   }
 }
