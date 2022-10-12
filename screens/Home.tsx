@@ -80,7 +80,6 @@ const Home = () => {
                 });
               }}
             />
-            {/*TODO funzione a parte*/}
           </View>
         }
         renderItem={({ item }) => <CitiyCard city={item} />}

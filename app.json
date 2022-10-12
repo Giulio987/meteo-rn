@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "meteo-rn",
-    "slug": "meteo-rn-v2",
+    "name": "meteo-desk-rn",
+    "slug": "meteo-desk-rn",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,11 +13,9 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
-      "url": "https://u.expo.dev/edf97467-0181-4191-a353-980bf3a88bba"
+      "url": "https://u.expo.dev/3804f15b-a00b-451a-a1bc-00f5dd353c1d"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -33,9 +31,10 @@
     "runtimeVersion": {
       "policy": "sdkVersion"
     },
+    "sdkVersion": "45.0.0",
     "extra": {
       "eas": {
-        "projectId": "edf97467-0181-4191-a353-980bf3a88bba"
+        "projectId": "3804f15b-a00b-451a-a1bc-00f5dd353c1d"
       }
     }
   }

@@ -1,4 +1,4 @@
-import { CityWeather } from '../models/weather';
+import { CityWeather } from '../components/models/weather';
 import Colors from '../styles/Colors';
 
 const cloudy = require('../assets/Cloudy.png');
