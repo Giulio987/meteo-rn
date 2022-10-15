@@ -43,9 +43,12 @@ export const weatherSlice = createSlice({
       state.isLoading = action.payload.isLoading;
       state.error = action.payload.error;
     },
+    removeCity: (state: WeatherState, action: PayloadAction<string>) => {
+      state.cities = state.cities.filter((city) => city.id !== action.payload);
+    },
   },
 });
 
-export const { setWeather, setCallState } = weatherSlice.actions;
+export const { setWeather, setCallState, removeCity } = weatherSlice.actions;
 
 export default weatherSlice.reducer;

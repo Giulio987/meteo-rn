@@ -42,7 +42,7 @@ const CityInput = () => {
             name: cityName,
             coord: { lat, lon },
             country,
-            id: 'c' + (cities.length + 1).toString(),
+            id: cityName + 'c' + (cities.length + 1).toString(),
           };
           dispatch(getWeather(city))
             .then(() => {
@@ -61,6 +61,9 @@ const CityInput = () => {
         style={styles.input}
         onChangeText={handleCityNameChange}
         value={cityName}
+        placeholder="City name"
+        autoComplete="off"
+        autoCorrect={false}
       />
       <View style={styles.buttonContainer}>
         <Pressable

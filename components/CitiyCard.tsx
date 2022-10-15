@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { CityWeather } from '../models/weather';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -6,6 +6,8 @@ import { Fonts, FontSizes } from '../styles/Fonts';
 import { getFormattedDate } from '../modules/utilities';
 import { useNavigation } from '@react-navigation/native';
 import { RootBottomNavigationProp } from '../models/route';
+import { useAppDispatch } from '../redux/store';
+import { removeCity } from '../redux/reducers/weather';
 
 interface CitiyCardProps {
   city: CityWeather;
@@ -15,6 +17,12 @@ const CitiyCard = ({ city }: CitiyCardProps) => {
   const day = getFormattedDate(city.mainWeather.localeDate)[0];
   const month = getFormattedDate(city.mainWeather.localeDate)[1];
   const navigation = useNavigation<RootBottomNavigationProp>();
+
+  //Redux
+  const dispatch = useAppDispatch();
+  const handleRemoveCity = () => {
+    dispatch(removeCity(city.id));
+  };
   return (
     <View style={styles.outerCard}>
       <Pressable
@@ -23,6 +31,23 @@ const CitiyCard = ({ city }: CitiyCardProps) => {
             screen: 'CityInfo',
             params: { city },
           });
+        }}
+        onLongPress={() => {
+          Alert.alert(
+            'Remove city',
+            'Are you sure you want to remove this city?',
+            [
+              {
+                text: 'Cancel',
+                style: 'cancel',
+              },
+              {
+                text: 'Remove',
+                style: 'destructive',
+                onPress: handleRemoveCity,
+              },
+            ]
+          );
         }}
       >
         <LinearGradient
