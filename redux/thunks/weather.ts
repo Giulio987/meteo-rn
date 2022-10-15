@@ -25,7 +25,6 @@ const getWeather = (city: CityToDispatch) => async (dispatch: AppDispatch) => {
     //Formattazione data e ora
     const { dt } = data.current;
     const dateTime = new Date(dt * 1000);
-
     const date = dateTime.toLocaleString('en-GB', {
       day: 'numeric',
       weekday: 'long',

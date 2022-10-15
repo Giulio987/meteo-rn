@@ -19,12 +19,13 @@ export const weatherSlice = createSlice({
   reducers: {
     setWeather: (state: WeatherState, action: PayloadAction<CityWeather>) => {
       if (action.payload) {
-        //FIXME se viene inserita una delle città presenti all'inizio l'id è diverso perche aggiunta successivamente
-        //Quindi non viene aggiornata ma viene aggiunta una nuova
         const index = state.cities.findIndex(
-          (city) => city.id === action.payload.id
+          (city) => city.name === action.payload.name
         );
         if (index !== -1) {
+          //update all data except id
+          let id = state.cities[index].id;
+          action.payload.id = id;
           state.cities[index] = action.payload;
         } else {
           state.cities = [...state.cities, action.payload];

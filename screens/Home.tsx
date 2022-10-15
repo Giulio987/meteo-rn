@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootState, useAppDispatch } from '../redux/store';
-import { getWeather } from '../redux/thunks/weather';
+import { getCityLocation, getWeather } from '../redux/thunks/weather';
 import AddCityBtn from '../components/AddCityBtn';
 import Colors from '../styles/Colors';
 import { useSelector } from 'react-redux';
@@ -18,25 +18,8 @@ import { FontSizes } from '../styles/Fonts';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { RootBottomNavigationProp } from '../models/route';
-
-export const INITIAL_CITIES = [
-  {
-    name: 'Turin',
-    country: 'IT',
-    id: 'c1',
-    coord: { lat: 45.064, lon: 7.66 },
-  },
-  { name: 'London', country: 'GB', id: 'c2', coord: { lat: 51.5, lon: -0.1 } },
-  {
-    name: 'Rome',
-    country: 'IT',
-    id: 'c3',
-    coord: {
-      lat: 41.9,
-      lon: 12.5,
-    },
-  },
-];
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { CityToDispatch } from '../components/models/weather';
 
 const Home = () => {
   //TODO per componenti diretti meglio { navigation, route }: RootBottomTabsScreenProps ma c'è un errore nei tipi da fixare
@@ -45,8 +28,17 @@ const Home = () => {
   const { cities } = useSelector((state: RootState) => state.weather);
   const dispatch = useAppDispatch();
   const dispatchMyAPi = useCallback(async () => {
-    for (const city of INITIAL_CITIES) {
-      await dispatch(getWeather(city));
+    for (const city of cities) {
+      dispatch(getCityLocation(city.name)).then((data: any) => {
+        const { lat, lon, country } = data[0];
+        const cityObj: CityToDispatch = {
+          name: city.name,
+          coord: { lat, lon },
+          country,
+          id: 'c' + (cities.length + 1).toString(),
+        };
+        dispatch(getWeather(cityObj));
+      });
     }
   }, [dispatch]);
   useEffect(() => {
@@ -64,8 +56,10 @@ const Home = () => {
 
   const navigation = useNavigation<RootBottomNavigationProp>();
 
+  const tabBarHeight = useBottomTabBarHeight();
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { paddingBottom: tabBarHeight }]}>
       <FlatList
         style={styles.list}
         contentContainerStyle={styles.listContentContainer}
@@ -112,7 +106,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.backgroundColor,
-    marginBottom: 80,
     overflow: 'hidden',
   },
   list: {

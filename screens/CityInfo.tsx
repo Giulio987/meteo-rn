@@ -14,12 +14,14 @@ import TemperatureRow from '../components/TemperatureRow';
 import { Fonts, FontSizes } from '../styles/Fonts';
 import NextDaysList from '../components/NextDaysList';
 import { HomeRouteProp } from '../models/route';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 
 const CityInfo = () => {
   const route = useRoute<HomeRouteProp>();
+  const tabBarHeight = useBottomTabBarHeight();
   return (
     <LinearGradient
-      style={styles.container}
+      style={[styles.container, { paddingBottom: tabBarHeight }]}
       colors={[
         route.params.city.mainWeather.style.first,
         route.params.city.mainWeather.style.second,
