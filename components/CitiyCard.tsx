@@ -23,6 +23,7 @@ const CitiyCard = ({ city }: CitiyCardProps) => {
   const handleRemoveCity = () => {
     dispatch(removeCity(city.id));
   };
+
   return (
     <View style={styles.outerCard}>
       <Pressable
@@ -56,7 +57,7 @@ const CitiyCard = ({ city }: CitiyCardProps) => {
           end={{ x: 1, y: 1 }}
           style={styles.innerCard}
         >
-          <View>
+          <View style={styles.textContainer}>
             <Text style={styles.title}>{city.name}</Text>
             <Text style={styles.date}>
               {day}
@@ -105,11 +106,15 @@ const styles = StyleSheet.create({
     lineHeight: 76,
     color: 'white',
   },
+  textContainer: {
+    maxWidth: 150,
+  },
   title: {
     fontSize: FontSizes.home.xl,
     color: 'white',
     fontFamily: Fonts.semiBold,
     lineHeight: 39,
+    paddingBottom: 4,
   },
   date: {
     fontSize: FontSizes.home.m,

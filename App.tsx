@@ -8,11 +8,13 @@ import store, { persistor } from './redux/store';
 import { useFonts } from 'expo-font';
 import { useCallback, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import Colors from './styles/Colors';
 import CityInfo from './screens/CityInfo';
 import { HomeStackParamList, BottomTabsParamList } from './models/route';
 import CityInput from './components/CityInput';
 import { PersistGate } from 'redux-persist/integration/react';
+import SearchCityByMap from './screens/SearchCityByMap';
+import SearchCity from './screens/SearchCity';
+import TabBarElement from './components/TabBarElement';
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
 const HomeStack = createNativeStackNavigator<HomeStackParamList>();
@@ -91,60 +93,39 @@ export default function App() {
                 options={{
                   tabBarIcon: ({ focused }) => {
                     return (
-                      <View style={styles.tabScreenContainer}>
-                        <View
-                          style={{
-                            flexDirection: 'row',
-                            flex: 1,
-                            justifyContent: 'center',
-                          }}
-                        >
-                          <Image
-                            source={require('./assets/home.png')}
-                            style={{ alignSelf: 'center' }}
-                          />
-                        </View>
-                        {focused && (
-                          <View
-                            style={{
-                              borderBottomWidth: 2,
-                              borderBottomColor: Colors.primary.main,
-                              width: 71,
-                            }}
-                          />
-                        )}
-                      </View>
+                      <TabBarElement
+                        imagePath={require('./assets/home.png')}
+                        focused={focused}
+                      />
                     );
                   },
                 }}
               />
               <Tab.Screen
                 name="Search"
-                component={Home}
+                component={SearchCity}
                 options={{
-                  tabBarIcon: ({}) => {
-                    return <Image source={require('./assets/search.png')} />;
-                  },
-                }}
-                listeners={{
-                  tabPress: (e) => {
-                    // Prevent default action and disable tab press
-                    e.preventDefault();
+                  tabBarIcon: ({ focused }) => {
+                    return (
+                      <TabBarElement
+                        imagePath={require('./assets/search.png')}
+                        focused={focused}
+                      />
+                    );
                   },
                 }}
               />
               <Tab.Screen
                 name="Location"
-                component={Home}
+                component={SearchCityByMap}
                 options={{
-                  tabBarIcon: ({}) => {
-                    return <Image source={require('./assets/location.png')} />;
-                  },
-                }}
-                listeners={{
-                  tabPress: (e) => {
-                    // Prevent default action and disable tab press
-                    e.preventDefault();
+                  tabBarIcon: ({ focused }) => {
+                    return (
+                      <TabBarElement
+                        imagePath={require('./assets/location.png')}
+                        focused={focused}
+                      />
+                    );
                   },
                 }}
               />
@@ -167,9 +148,5 @@ const styles = StyleSheet.create({
     right: 20,
     borderRadius: 25,
     paddingBottom: 0,
-  },
-  tabScreenContainer: {
-    justifyContent: 'space-between',
-    flex: 1,
   },
 });

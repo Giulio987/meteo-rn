@@ -19,7 +19,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { RootBottomNavigationProp } from '../models/route';
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
-import { CityToDispatch } from '../components/models/weather';
+import { CityToDispatch } from '../models/weather';
 
 const Home = () => {
   //TODO per componenti diretti meglio { navigation, route }: RootBottomTabsScreenProps ma c'è un errore nei tipi da fixare
